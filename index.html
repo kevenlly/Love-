@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nosso Amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fff0f5;
+      font-family: 'Quicksand', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+    }
+    header {
+      text-align: center;
+      padding: 30px 10px;
+      background-color: #ffccdd;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 40px;
+      color: #c71585;
+    }
+    .contador-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 30px;
+      margin: 40px 0;
+    }
+    .contador-box {
+      background: rgba(255, 192, 203, 0.15);
+      border: 2px solid #ff99cc;
+      border-radius: 20px;
+      padding: 20px 30px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(255, 192, 203, 0.4);
+      max-width: 400px;
+      width: 90%;
+    }
+    .contador-box h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 24px;
+      color: #ff4d88;
+      margin-bottom: 15px;
+    }
+    .contador {
+      font-size: 20px;
+      color: #333;
+      font-weight: bold;
+      font-family: 'Courier New', monospace;
+    }
+    /* Carrossel fotos */
+    .carrossel-container {
+      position: relative;
+      max-width: 720px;
+      margin: 0 auto 40px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 4px 15px rgba(255, 105, 180, 0.4);
+      background: #ffe6f0;
+    }
+    .carrossel {
+      display: flex;
+      transition: transform 0.5s ease;
+      will-change: transform;
+    }
+    .carrossel-item {
+      min-width: 100%;
+      user-select: none;
+      position: relative;
+      text-align: center;
+      padding: 15px 10px 60px 10px;
+    }
+    .carrossel-item img {
+      width: 100%;
+      max-height: 400px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(199, 21, 133, 0.6);
+      object-fit: cover;
+      cursor: pointer;
+    }
+    .declaracao-foto {
+      margin-top: 15px;
+      font-style: italic;
+      color: #cc0066;
+      font-family: 'Dancing Script', cursive;
+      font-size: 22px;
+      min-height: 50px;
+      user-select: none;
+    }
+    /* Datas especiais */
+    .datas-especiais {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 10px 50px 10px;
+      gap: 20px;
+      max-width: 600px;
+      margin: 0 auto 60px auto;
+    }
+    .data-box {
+      border: 2px dashed #ff99cc;
+      padding: 15px 20px;
+      border-radius: 15px;
+      background: #ffe6f0;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 3px 10px rgba(255, 105, 180, 0.3);
+      user-select: none;
+    }
+    .data-box h3 {
+      margin: 0 0 10px;
+      color: #c71585;
+      font-family: 'Dancing Script', cursive;
+      font-size: 26px;
+    }
+    .btn-declarar {
+      background-color: #ff69b4;
+      color: white;
+      padding: 10px 25px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-family: 'Dancing Script', cursive;
+      font-size: 20px;
+      transition: background-color 0.3s ease;
+      user-select: none;
+    }
+    .btn-declarar:hover {
+      background-color: #d63384;
+    }
+    .declaracao {
+      display: none;
+      margin-top: 15px;
+      font-style: italic;
+      color: #cc0066;
+      font-family: 'Dancing Script', cursive;
+      font-size: 20px;
+      user-select: text;
+      white-space: pre-wrap;
+    }
+    audio {
+      display: block;
+      margin: 20px auto 60px auto;
+      outline: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Nosso Amor em Cada Momento ❤️</h1>
+  </header>
+
+  <div class="contador-container">
+    <div class="contador-box">
+      <h2>Desde o nosso primeiro beijo 💋</h2>
+      <div id="contador-beijo" class="contador">Carregando...</div>
+    </div>
+    <div class="contador-box">
+      <h2>Desde o nosso namoro oficial 💑</h2>
+      <div id="contador-namoro" class="contador">Carregando...</div>
+    </div>
+  </div>
+
+  <audio controls>
+    <source src="all_of_me.mp3" type="audio/mp3" />
+    Seu navegador não suporta áudio.
+  </audio>
+
+  <section class="carrossel-container" id="carrossel-container" aria-label="Galeria de fotos do nosso amor">
+    <div class="carrossel" id="carrossel">
+      <!-- Fotos e declarações -->
+      <div class="carrossel-item">
+        <img src="foto1.jpg" alt="Foto 1" draggable="false" />
+        <div class="declaracao-foto">Você é meu tudo!</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto2.jpg" alt="Foto 2" draggable="false" />
+        <div class="declaracao-foto">Cada momento contigo é magia.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto3.jpg" alt="Foto 3" draggable="false" />
+        <div class="declaracao-foto">Seu sorriso ilumina meus dias.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto4.jpg" alt="Foto 4" draggable="false" />
+        <div class="declaracao-foto">Nosso amor é poesia viva.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto5.jpg" alt="Foto 5" draggable="false" />
+        <div class="declaracao-foto">Você é minha melhor escolha.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto6.jpg" alt="Foto 6" draggable="false" />
+        <div class="declaracao-foto">Te amar é meu maior presente.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto7.jpg" alt="Foto 7" draggable="false" />
+        <div class="declaracao-foto">Nosso amor cresce a cada dia.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto8.jpg" alt="Foto 8" draggable="false" />
+        <div class="declaracao-foto">Você é meu porto seguro.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto9.jpg" alt="Foto 9" draggable="false" />
+        <div class="declaracao-foto">Amar você é minha alegria.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto10.jpg" alt="Foto 10" draggable="false" />
+        <div class="declaracao-foto">Cada instante é eterno contigo.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto11.jpg" alt="Foto 11" draggable="false" />
+        <div class="declaracao-foto">Você transforma meus dias.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto12.jpg" alt="Foto 12" draggable="false" />
+        <div class="declaracao-foto">Com você, sou completo.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto13.jpg" alt="Foto 13" draggable="false" />
+        <div class="declaracao-foto">Você é meu sonho realizado.</div>
+      </div>
+      <div class="carrossel-item">
+        <img src="foto14.jpg" alt="Foto 14" draggable="false" />
+        <div class="declaracao-foto">Para sempre ao seu lado.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="datas-especiais" aria-label="Datas especiais">
+    <div class="data-box">
+      <h3>11/08/2024 - Nosso primeiro beijo 💋</h3>
+      <button class="btn-declarar" onclick="mostrarDeclaracao(this, 'Nunca esquecerei aquele momento mágico em que nossos lábios se tocaram.')">Ver declaração</button>
+      <div class="declaracao"></div>
+    </div>
+    <div class="data-box">
+      <h3>18/01/2025 - Primeiro date 🍰</h3>
+      <button class="btn-declarar" onclick="mostrarDeclaracao(this, 'Nosso primeiro encontro foi o início da mais doce das histórias.')">Ver declaração</button>
+      <div class="declaracao"></div>
+    </div>
+    <div class="data-box">
+      <h3>01/02/2025 - Pedido de namoro oficial 💍</h3>
+      <button class="btn-declarar" onclick="mostrarDeclaracao(this, 'Desde esse dia, você tem meu coração para sempre.')">Ver declaração</button>
+      <div class="declaracao"></div>
+    </div>
+    <div class="data-box">
+      <h3>02/03/2025 - Primeira viagem ao sítio com a família 🌳</h3>
+      <button class="btn-declarar" onclick="mostrarDeclaracao(this, 'Momentos inesquecíveis em família, só reforçando nosso amor.')">Ver declaração</button>
+      <div class="declaracao"></div>
+    </div>
+    <div class="data-box">
+      <h3>01/04/2025 - Entrega das alianças 💎</h3>
+      <button class="btn-declarar" onclick="mostrarDeclaracao(this, 'Um símbolo eterno do nosso compromisso e amor.')">Ver declaração</button>
+      <div class="declaracao"></div>
+    </div>
+  </section>
+
+  <script>
+    // Mostrar/Esconder declaração das datas especiais
+    function mostrarDeclaracao(botao, texto) {
+      const div = botao.nextElementSibling;
+      if (div.style.display === 'block') {
+        div.style.display = 'none';
+        div.innerText = '';
+      } else {
+        div.innerText = texto;
+        div.style.display = 'block';
+      }
+    }
+
+    // Atualizar os contadores em tempo real
+
+    <script>
+  // Função para calcular diferença entre datas
+  function calculaDiferenca(dataInicial) {
+    const agora = new Date();
+    let diff = agora - dataInicial;
+
+    const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+    diff -= dias * (1000 * 60 * 60 * 24);
+
+    const horas = Math.floor(diff / (1000 * 60 * 60));
+    diff -= horas * (1000 * 60 * 60);
+
+    const minutos = Math.floor(diff / (1000 * 60));
+    diff -= minutos * (1000 * 60);
+
+    const segundos = Math.floor(diff / 1000);
+
+    return { dias, horas, minutos, segundos };
+  }
+
+  // Atualiza os contadores do primeiro beijo e namoro oficial
+  function atualizarContadores() {
+    const beijoData = new Date('2024-08-11T00:00:00');
+    const namoroData = new Date('2025-02-01T00:00:00');
+
+    const beijoDiff = calculaDiferenca(beijoData);
+    const namoroDiff = calculaDiferenca(namoroData);
+
+    const formato = d => String(d).padStart(2, '0');
+
+    const beijoTexto = `${formato(beijoDiff.dias)} dias, ${formato(beijoDiff.horas)}h ${formato(beijoDiff.minutos)}m ${formato(beijoDiff.segundos)}s`;
+    const namoroTexto = `${formato(namoroDiff.dias)} dias, ${formato(namoroDiff.horas)}h ${formato(namoroDiff.minutos)}m ${formato(namoroDiff.segundos)}s`;
+
+    document.getElementById('contador-beijo').textContent = beijoTexto;
+    document.getElementById('contador-namoro').textContent = namoroTexto;
+  }
+
+  setInterval(atualizarContadores, 1000);
+  atualizarContadores();
+
+  // Swipe para carrossel e declaração automática
+  const carrossel = document.getElementById('carrossel');
+  const itens = carrossel.querySelectorAll('.carrossel-item');
+  let posicaoAtual = 0;
+  let inicioX = 0;
+  let movimentando = false;
+
+  // Atualiza a posição do carrossel e mostra declaração da foto atual
+  function atualizarCarrossel() {
+    carrossel.style.transform = `translateX(-${posicaoAtual * 100}%)`;
+    itens.forEach((item, idx) => {
+      const decl = item.querySelector('.declaracao-foto');
+      decl.style.opacity = idx === posicaoAtual ? '1' : '0';
+      decl.style.transition = 'opacity 0.5s ease';
+    });
+  }
+
+  // Inicializa declarações - só mostra a da primeira foto
+  atualizarCarrossel();
+
+  // Eventos touch para swipe mobile
+  carrossel.addEventListener('touchstart', e => {
+    inicioX = e.touches[0].clientX;
+    movimentando = true;
+  });
+
+  carrossel.addEventListener('touchmove', e => {
+    if (!movimentando) return;
+    const movimentoX = e.touches[0].clientX;
+    const diffX = inicioX - movimentoX;
+
+    // Se deslizar para esquerda e não está no último
+    if (diffX > 50 && posicaoAtual < itens.length - 1) {
+      posicaoAtual++;
+      atualizarCarrossel();
+      movimentando = false;
+    }
+    // Se deslizar para direita e não está no primeiro
+    else if (diffX < -50 && posicaoAtual > 0) {
+      posicaoAtual--;
+      atualizarCarrossel();
+      movimentando = false;
+    }
+  });
+
+  carrossel.addEventListener('touchend', e => {
+    movimentando = false;
+  });
+
+  // Para desktop: swipe com mouse (drag)
+  let isDragging = false;
+  let startX = 0;
+
+  carrossel.addEventListener('mousedown', e => {
+    isDragging = true;
+    startX = e.clientX;
+  });
+  window.addEventListener('mouseup', e => {
+    if (!isDragging) return;
+    isDragging = false;
+    const diff = startX - e.clientX;
+    if (diff > 50 && posicaoAtual < itens.length - 1) {
+      posicaoAtual++;
+      atualizarCarrossel();
+    } else if (diff < -50 && posicaoAtual > 0) {
+      posicaoAtual--;
+      atualizarCarrossel();
+    }
+  });
+  carrossel.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    // Prevent default para evitar seleção de texto
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>
