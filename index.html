@@ -1,23 +1,23 @@
 <!DOCTYPE html><html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nosso Amor Eterno 💖</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nosso Amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet" />
   <style>
     body {
       font-family: 'Open Sans', sans-serif;
-      background: linear-gradient(to bottom, #fff0f5, #ffe6f0);
+      background: #fffafc;
       color: #5b1a35;
       margin: 0;
+      text-align: center;
       overflow-x: hidden;
-      transition: background 1s ease;
     }
     h1 {
       font-family: 'Great Vibes', cursive;
-      font-size: 3.5em;
-      margin: 20px 0 10px;
-      color: #d63384;
+      font-size: 3em;
+      margin-top: 0.5em;
+      color: #d14d72;
     }
     .carousel {
       position: relative;
@@ -26,7 +26,7 @@
       margin: 20px auto;
       overflow: hidden;
       border-radius: 20px;
-      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
     }
     .carousel img {
       width: 100%;
@@ -43,30 +43,23 @@
       to {opacity: 1;}
     }
     .declaration {
-      font-size: 1.3em;
+      font-size: 1.2em;
       font-style: italic;
-      margin: 15px auto;
-      max-width: 80%;
-    }
-    .romantic-btns {
-      text-align: center;
-      margin: 15px 0;
+      margin: 10px 0 20px;
     }
     .romantic-btns button {
       margin: 5px;
       padding: 10px 20px;
       border: none;
-      border-radius: 15px;
+      border-radius: 10px;
       font-size: 1em;
       cursor: pointer;
       background: #ff85a2;
       color: white;
-      transition: all 0.3s ease;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+      transition: background 0.3s;
     }
     .romantic-btns button:hover {
-      background: #ff5c8a;
-      transform: scale(1.05);
+      background: #ff678a;
     }
     .contador {
       font-weight: bold;
@@ -75,24 +68,22 @@
     }
     .poema-digitado {
       font-family: 'Great Vibes', cursive;
-      font-size: 1.6em;
+      font-size: 1.5em;
       white-space: pre-wrap;
       margin: 20px auto;
       width: 80%;
       padding: 15px;
-      background: rgba(255,255,255,0.8);
-      border-radius: 15px;
-      animation: fade 3s ease-in-out;
+      background: #ffe6f0;
+      border-radius: 10px;
     }
     .floating-hearts {
       position: fixed;
-      top: 0;
+      bottom: 0;
       left: 0;
       width: 100%;
       height: 100%;
       pointer-events: none;
-      overflow: hidden;
-      z-index: 0;
+      z-index: 9999;
     }
     .heart {
       position: absolute;
@@ -100,9 +91,10 @@
       height: 20px;
       background: red;
       transform: rotate(45deg);
-      animation: float 6s linear infinite;
+      animation: floatUp 5s infinite;
     }
-    .heart::before, .heart::after {
+    .heart:before,
+    .heart:after {
       content: "";
       position: absolute;
       width: 20px;
@@ -110,42 +102,52 @@
       background: red;
       border-radius: 50%;
     }
-    .heart::before {
+    .heart:before {
       top: -10px;
       left: 0;
     }
-    .heart::after {
-      left: -10px;
+    .heart:after {
       top: 0;
+      left: -10px;
     }
-    @keyframes float {
-      0% { transform: translateY(0) scale(1) rotate(45deg); opacity: 1; }
-      100% { transform: translateY(-100vh) scale(1.5) rotate(45deg); opacity: 0; }
+    @keyframes floatUp {
+      0% {
+        bottom: 0;
+        opacity: 1;
+      }
+      100% {
+        bottom: 100%;
+        opacity: 0;
+      }
     }
-    .surprise {
+    .data-especial {
+      margin: 20px 0;
+    }
+    .data-especial button {
+      background: #ffadc2;
+      color: white;
+    }
+    .popup-final {
       display: none;
       position: fixed;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      background: #fff0f5;
-      padding: 25px;
+      background: white;
+      padding: 20px;
       border-radius: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      font-size: 1.3em;
-      z-index: 100;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
-  <div class="floating-hearts" id="hearts"></div>
-  <h1>Nosso Amor Eterno 💖</h1>
+  <h1>Nosso Amor</h1>
   <div class="romantic-btns">
-    <button onclick="toggleNightMode()">🌙 Modo Noite</button>
-    <button onclick="tocarMusica()">🎵 Tocar / Trocar Música</button>
+    <button onclick="ativarModoNoite()">🌙 Modo Noite</button>
     <button onclick="mostrarFrase()">💌 Me sinto assim por você...</button>
-  </div>
-  <div class="carousel" onclick="mostrarBotaoSecreto(index)">
+    <button onclick="trocarMusica()">🎵 Trocar música</button>
+  </div>  <div class="carousel" onclick="proximaFoto()">
     <img src="foto1.jpg" class="active" alt="Foto 1">
     <img src="foto2.jpg" alt="Foto 2">
     <img src="foto3.jpg" alt="Foto 3">
@@ -161,14 +163,23 @@
     <img src="foto13.jpg" alt="Foto 13">
     <img src="foto14.jpg" alt="Foto 14">
   </div>
-  <div class="declaration" id="declaration"></div>
-  <div class="contador" id="contadorBeijo"></div>
-  <div class="contador" id="contadorNamoro"></div>
-  <div class="poema-digitado" id="poema"></div>
-  <div class="surprise" id="surpresa">✨ Você é o grande amor da minha vida. Para sempre juntos! ✨</div>  <audio id="musica" autoplay loop>
+  <div class="declaration" id="declaration"></div>  <div class="contador" id="contadorBeijo"></div>
+  <div class="contador" id="contadorNamoro"></div>  <div class="data-especial">
+    <button onclick="mostrarPoema('Primeiro Beijo')">💋 11/08/2024</button>
+    <button onclick="mostrarPoema('Primeiro Date')">🍷 18/01/2025</button>
+    <button onclick="mostrarPoema('Pedido de Namoro')">💍 01/02/2025</button>
+    <button onclick="mostrarPoema('Viagem Sítio')">🏡 02/03/2025</button>
+    <button onclick="mostrarPoema('Entrega Alianças')">🔗 01/04/2025</button>
+  </div>  <div class="poema-digitado" id="poema"></div>
+  <div class="popup-final" id="popupFinal">
+    <h2>🌟 Surpresa Final 🌟</h2>
+    <p>Nosso amor é minha maior alegria. Você é tudo pra mim!</p>
+    <button onclick="document.getElementById('popupFinal').style.display='none'">Fechar</button>
+  </div>
+  <div class="floating-hearts" id="hearts"></div>
+  <audio id="musica" autoplay loop>
     <source src="all_of_me.mp3" type="audio/mpeg">
-  </audio>
-  <script>
+  </audio>  <script>
     const frases = [
       "Cada momento ao seu lado é um presente do universo.",
       "Seu sorriso ilumina meus dias como o sol.",
@@ -185,72 +196,88 @@
       "Você é meu sonho realizado.",
       "Somos perfeitos juntos."
     ];
+    const poemas = {
+      "Primeiro Beijo": "Naquela noite mágica e calma,\nselou-se o amor com um beijo na alma.",
+      "Primeiro Date": "Um jantar, um olhar, mãos entrelaçadas,\num início de amor em risadas trocadas.",
+      "Pedido de Namoro": "No brilho dos teus olhos, fiz morada,\ne em teu sim, nasceu a caminhada.",
+      "Viagem Sítio": "Entre verdes e sorrisos sem fim,\nteu carinho fez morada em mim.",
+      "Entrega Alianças": "Com um par de alianças em nossas mãos,\nselamos promessas e novos planos."
+    };
+
     let index = 0;
     const imgs = document.querySelectorAll(".carousel img");
     const declaration = document.getElementById("declaration");
-    function trocaImagem() {
-      imgs.forEach(img => img.classList.remove("active"));
+    function proximaFoto() {
+      imgs[index].classList.remove("active");
+      index = (index + 1) % imgs.length;
       imgs[index].classList.add("active");
       declaration.innerText = frases[index];
-      index = (index + 1) % imgs.length;
     }
-    setInterval(trocaImagem, 4000);function atualizaContadores() {
-  const beijo = new Date("2024-08-11T00:00:00");
-  const namoro = new Date("2025-02-01T00:00:00");
-  const agora = new Date();
-  function calculaTempo(data) {
-    let diff = agora - data;
-    let dias = Math.floor(diff / (1000 * 60 * 60 * 24));
-    let horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
-    let minutos = Math.floor((diff / (1000 * 60)) % 60);
-    let segundos = Math.floor((diff / 1000) % 60);
-    return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
-  }
-  document.getElementById("contadorBeijo").innerText =
-    `Desde o primeiro beijo: ${calculaTempo(beijo)}`;
-  document.getElementById("contadorNamoro").innerText =
-    `Desde o pedido oficial de namoro: ${calculaTempo(namoro)}`;
-}
-setInterval(atualizaContadores, 1000);
-atualizaContadores();
+    setInterval(proximaFoto, 4000);
 
-function mostrarFrase() {
-  alert(frases[Math.floor(Math.random() * frases.length)]);
-}
-function toggleNightMode() {
-  document.body.style.background = '#1c1c1c';
-  document.body.style.color = '#f8d4dd';
-}
-const poema = `Você chegou como brisa suave,\nMe envolveu com teu calor,\nFez do meu mundo um jardim,\nOnde só floresce o amor.`;
-let pIndex = 0;
-function digitarPoema() {
-  if (pIndex < poema.length) {
-    document.getElementById("poema").innerText += poema[pIndex];
-    pIndex++;
-    setTimeout(digitarPoema, 100);
-  }
-}
-digitarPoema();
+    function atualizaContadores() {
+      const beijo = new Date("2024-08-11T00:00:00");
+      const namoro = new Date("2025-02-01T00:00:00");
+      const agora = new Date();
 
-function criarCoracoes() {
-  const heart = document.createElement("div");
-  heart.className = "heart";
-  heart.style.left = Math.random() * 100 + "vw";
-  heart.style.animationDuration = Math.random() * 3 + 3 + "s";
-  document.getElementById("hearts").appendChild(heart);
-  setTimeout(() => heart.remove(), 6000);
-}
-setInterval(criarCoracoes, 300);
+      function calculaTempo(data) {
+        let diff = agora - data;
+        let dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        let horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        let minutos = Math.floor((diff / (1000 * 60)) % 60);
+        let segundos = Math.floor((diff / 1000) % 60);
+        return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+      }
 
-setTimeout(() => {
-  document.getElementById("surpresa").style.display = "block";
-}, 60000);
+      document.getElementById("contadorBeijo").innerText =
+        `Desde o primeiro beijo: ${calculaTempo(beijo)}`;
+      document.getElementById("contadorNamoro").innerText =
+        `Desde o início do namoro: ${calculaTempo(namoro)}`;
+    }
+    setInterval(atualizaContadores, 1000);
+    atualizaContadores();
 
-function tocarMusica() {
-  const musica = document.getElementById("musica");
-  musica.paused ? musica.play() : musica.pause();
-}
+    function mostrarFrase() {
+      alert(frases[Math.floor(Math.random() * frases.length)]);
+    }
+    function mostrarPoema(data) {
+      const texto = poemas[data] || "Amor eterno em cada gesto.";
+      const el = document.getElementById("poema");
+      el.innerText = "";
+      let i = 0;
+      function digitar() {
+        if (i < texto.length) {
+          el.innerText += texto[i];
+          i++;
+          setTimeout(digitar, 70);
+        }
+      }
+      digitar();
+    }
+    function ativarModoNoite() {
+      document.body.style.background = "#1c1c1c";
+      document.body.style.color = "#fce4ec";
+    }
+    function trocarMusica() {
+      const audio = document.getElementById("musica");
+      audio.src = audio.src.includes("all_of_me") ? "musica2.mp3" : "all_of_me.mp3";
+      audio.play();
+    }
+    function criarCorações() {
+      const container = document.getElementById("hearts");
+      setInterval(() => {
+        const heart = document.createElement("div");
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * 100 + "%";
+        container.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }, 300);
+    }
+    criarCorações();
 
-  </script>
-</body>
+    // Mensagem final surpresa após 1 minuto
+    setTimeout(() => {
+      document.getElementById("popupFinal").style.display = "block";
+    }, 60000);
+  </script></body>
 </html>
