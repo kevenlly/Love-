@@ -1,36 +1,187 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
+<!DOCTYPE html><html lang="pt-BR"><head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Nosso Amor</title>
-  <link rel="stylesheet" href="css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet">
-</head>
-<body>
-  <div id="romantic-mode">
-    <audio id="bgMusic" src="audio/all_of_me.mp3" autoplay loop></audio>
-    <div class="slider-container">
-      <div class="slider" id="slider">
-        <!-- Imagens com frases aqui -->
-      </div>
-    </div>
-    <div id="declaration-box" class="declaration"></div>
-    <div id="timeline">
-      <!-- Datas especiais e botões -->
-    </div>
-    <div id="counters">
-      <div id="counter-namoro"></div>
-      <div id="counter-beijo"></div>
-    </div>
-    <div id="poem-section">
-      <p id="typed-poem"></p>
-    </div>
-    <button id="romantic-night">🌙 Modo Noite Romântica</button>
-    <button id="random-feelings">💌 Me sinto assim por você...</button>
-    <div id="final-message-popup" class="popup">Mensagem final surpresa</div>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #fffafc;
+      color: #5b1a35;
+      margin: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      margin-top: 0.5em;
+    }
+    .carousel {
+      position: relative;
+      width: 90vw;
+      max-width: 600px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    .carousel img {
+      width: 100%;
+      display: none;
+      border-radius: 20px;
+    }
+    .carousel img.active {
+      display: block;
+      animation: fade 1s ease-in-out;
+    }
+    @keyframes fade {
+      from {opacity: 0;}
+      to {opacity: 1;}
+    }
+    .declaration {
+      font-size: 1.2em;
+      font-style: italic;
+      margin: 10px 0 20px;
+    }
+    .romantic-btns button {
+      margin: 5px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      background: #ff85a2;
+      color: white;
+      transition: background 0.3s;
+    }
+    .romantic-btns button:hover {
+      background: #ff678a;
+    }
+    #night-mode {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+    }
+    #frase-btn {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+    }
+    .contador {
+      font-weight: bold;
+      font-size: 1.1em;
+      margin: 10px 0;
+    }
+    .poema-digitado {
+      font-family: 'Great Vibes', cursive;
+      font-size: 1.5em;
+      white-space: pre-wrap;
+      border-top: 1px dashed #ccc;
+      margin: 20px auto;
+      width: 80%;
+      padding-top: 15px;
+    }
+  </style>
+</head><body>
+  <h1>Nosso Amor</h1>  <div class="romantic-btns">
+    <button id="night-mode">🌙 Modo Noite Romântica</button>
+    <button id="frase-btn">💌 Me sinto assim por você...</button>
+  </div>  <div class="carousel">
+    <img src="foto1.jpg" class="active" alt="Foto 1">
+    <img src="foto2.jpg" alt="Foto 2">
+    <img src="foto3.jpg" alt="Foto 3">
+    <img src="foto4.jpg" alt="Foto 4">
+    <img src="foto5.jpg" alt="Foto 5">
+    <img src="foto6.jpg" alt="Foto 6">
+    <img src="foto7.jpg" alt="Foto 7">
+    <img src="foto8.jpg" alt="Foto 8">
+    <img src="foto9.jpg" alt="Foto 9">
+    <img src="foto10.jpg" alt="Foto 10">
+    <img src="foto11.jpg" alt="Foto 11">
+    <img src="foto12.jpg" alt="Foto 12">
+    <img src="foto13.jpg" alt="Foto 13">
+    <img src="foto14.jpg" alt="Foto 14">
   </div>
+  <div class="declaration" id="declaration"></div>  <div class="contador" id="contadorBeijo"></div>
+  <div class="contador" id="contadorNamoro"></div>  <div class="poema-digitado" id="poema"></div>  <audio id="musica" autoplay loop>
+    <source src="all_of_me.mp3" type="audio/mpeg">
+  </audio>  <script>
+    const frases = [
+      "Cada momento ao seu lado é um presente do universo.",
+      "Seu sorriso ilumina meus dias como o sol.",
+      "Você é minha inspiração diária.",
+      "Nosso amor cresce mais a cada instante.",
+      "Seu abraço é meu lugar favorito.",
+      "Você é o motivo do meu melhor sorriso.",
+      "Com você, tudo faz sentido.",
+      "Você é meu lar, minha paz.",
+      "Nosso amor é eterno em cada batida do meu coração.",
+      "Te amo mais do que palavras podem expressar.",
+      "Meu coração é todo seu.",
+      "Amar você é a melhor parte da minha vida.",
+      "Você é meu sonho realizado.",
+      "Somos perfeitos juntos."
+    ];
 
-  <script src="js/script.js"></script>
-</body>
-</html>
+    let index = 0;
+    const imgs = document.querySelectorAll(".carousel img");
+    const declaration = document.getElementById("declaration");
+
+    function trocaImagem() {
+      imgs.forEach(img => img.classList.remove("active"));
+      imgs[index].classList.add("active");
+      declaration.innerText = frases[index];
+      index = (index + 1) % imgs.length;
+    }
+    setInterval(trocaImagem, 3000);
+
+    // Contadores
+    function atualizaContadores() {
+      const beijo = new Date("2024-08-11T00:00:00");
+      const namoro = new Date("2025-02-01T00:00:00");
+      const agora = new Date();
+
+      function calculaTempo(data) {
+        let diff = agora - data;
+        let dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        let horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        let minutos = Math.floor((diff / (1000 * 60)) % 60);
+        let segundos = Math.floor((diff / 1000) % 60);
+        return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+      }
+
+      document.getElementById("contadorBeijo").innerText =
+        `Desde o primeiro beijo: ${calculaTempo(beijo)}`;
+      document.getElementById("contadorNamoro").innerText =
+        `Desde o início do namoro: ${calculaTempo(namoro)}`;
+    }
+    setInterval(atualizaContadores, 1000);
+    atualizaContadores();
+
+    // Modo noite
+    document.getElementById("night-mode").onclick = () => {
+      document.body.style.background = "#1c1c1c";
+      document.body.style.color = "#f8d4dd";
+    };
+
+    // Frases aleatórias
+    document.getElementById("frase-btn").onclick = () => {
+      alert(frases[Math.floor(Math.random() * frases.length)]);
+    };
+
+    // Efeito digitação poema
+    const poema = `Você chegou como brisa suave,
+Me envolveu com teu calor,
+Fez do meu mundo um jardim,
+Onde só floresce o amor.`;
+    let pIndex = 0;
+    function digitarPoema() {
+      if (pIndex < poema.length) {
+        document.getElementById("poema").innerText += poema[pIndex];
+        pIndex++;
+        setTimeout(digitarPoema, 100);
+      }
+    }
+    digitarPoema();
+  </script></body></html>
