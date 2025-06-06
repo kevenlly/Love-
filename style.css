@@ -1,0 +1,15 @@
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #fffafc;
+  color: #5b1a35;
+  margin: 0;
+  text-align: center;
+  overflow-x: hidden;
+}
+h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 3em;
+  margin-top: 0.5em;
+}
+/* Outros estilos adicionados anteriormente */
