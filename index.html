@@ -2,14 +2,390 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nosso Amor</title>
-  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Roboto&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset e base */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: linear-gradient(135deg, #ffe6f0 0%, #ffb6c1 100%);
+      color: #4a1a2a;
+      margin: 0; padding: 0;
+      overflow-x: hidden;
+      transition: background 1s ease, color 1s ease;
+    }
+    h1, h2 {
+      font-family: 'Parisienne', cursive;
+      text-align: center;
+      margin: 15px 0;
+      color: #8b005d;
+      text-shadow: 1px 1px 3px #fff;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 15px;
+    }
+    /* Carrossel */
+    .carousel {
+      position: relative;
+      height: 400px;
+      margin: 20px auto;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #ff7ca1aa;
+      cursor: pointer;
+      user-select: none;
+    }
+    .carousel img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease;
+      border-radius: 20px;
+    }
+    .carousel img.active {
+      opacity: 1;
+      z-index: 2;
+    }
+    .declaration {
+      text-align: center;
+      font-size: 1.3rem;
+      margin-top: 10px;
+      font-style: italic;
+      color: #8b005d;
+      text-shadow: 1px 1px 2px #fff;
+    }
+    /* Botões datas especiais */
+    .datas-especiais {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .data-btn {
+      background: #ffb6c1;
+      color: white;
+      padding: 12px 25px;
+      border: none;
+      border-radius: 25px;
+      margin: 8px;
+      font-size: 1.1em;
+      cursor: pointer;
+      box-shadow: 0 0 10px #ff82a9aa;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      font-family: 'Parisienne', cursive;
+    }
+    .data-btn:hover,
+    .data-btn:focus {
+      outline: none;
+      background: #ff82a9;
+      transform: scale(1.1);
+      box-shadow: 0 0 15px #ff82a9ee;
+    }
+    /* Contadores */
+    .contadores {
+      display: flex;
+      justify-content: center;
+      gap: 25px;
+      margin: 20px 0;
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #6a1641;
+    }
+    /* Botões de controle */
+    .controls {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .btn-control {
+      background: #ff82a9;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 25px;
+      font-size: 1rem;
+      margin: 8px;
+      cursor: pointer;
+      font-family: 'Parisienne', cursive;
+      box-shadow: 0 0 12px #ff4c7daa;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+    .btn-control:hover,
+    .btn-control:focus {
+      outline: none;
+      background: #ff4c7d;
+      transform: scale(1.1);
+      box-shadow: 0 0 18px #ff4c7dee;
+    }
+    /* Poema com digitação */
+    #poema {
+      max-width: 600px;
+      margin: 25px auto;
+      font-family: 'Parisienne', cursive;
+      font-size: 1.4rem;
+      color: #8b005d;
+      border-left: 4px solid #ff4c7d;
+      padding-left: 15px;
+      white-space: pre-wrap;
+      min-height: 90px;
+    }
+    /* Corações flutuantes */
+    @keyframes subir {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+    .coracao {
+      position: fixed;
+      z-index: 9999;
+      pointer-events: none;
+      animation: subir 5s linear forwards;
+      user-select: none;
+    }
+    /* Modo noite romântica */
+    .modo-noite {
+      background: #1a1a1a !important;
+      color: #fce4ec !important;
+      transition: background 1s ease, color 1s ease;
+    }
+    .modo-noite .carousel img {
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+    /* Zoom nas imagens */
+    .zoom {
+      transition: transform 0.5s ease;
+      cursor: zoom-in;
+    }
+    .zoom:active {
+      transform: scale(1.3);
+      cursor: zoom-out;
+      z-index: 10;
+      position: relative;
+      box-shadow: 0 0 25px #ff4c7dcc;
+    }
+  </style>
 </head>
 <body>
-  <!-- Conteúdo principal vem aqui -->
-  <!-- Esta parte será preenchida com HTML completo anteriormente enviado -->
-  <!-- A última parte já contém o fechamento correto -->
+  <div class="container">
+    <h1>Nosso Amor</h1>
+
+    <!-- Carrossel com 14 fotos -->
+    <div class="carousel" aria-label="Carrossel de fotos do nosso amor" tabindex="0">
+      <img src="foto1.jpg" alt="Foto 1" class="active zoom" />
+      <img src="foto2.jpg" alt="Foto 2" class="zoom" />
+      <img src="foto3.jpg" alt="Foto 3" class="zoom" />
+      <img src="foto4.jpg" alt="Foto 4" class="zoom" />
+      <img src="foto5.jpg" alt="Foto 5" class="zoom" />
+      <img src="foto6.jpg" alt="Foto 6" class="zoom" />
+      <img src="foto7.jpg" alt="Foto 7" class="zoom" />
+      <img src="foto8.jpg" alt="Foto 8" class="zoom" />
+      <img src="foto9.jpg" alt="Foto 9" class="zoom" />
+      <img src="foto10.jpg" alt="Foto 10" class="zoom" />
+      <img src="foto11.jpg" alt="Foto 11" class="zoom" />
+      <img src="foto12.jpg" alt="Foto 12" class="zoom" />
+      <img src="foto13.jpg" alt="Foto 13" class="zoom" />
+      <img src="foto14.jpg" alt="Foto 14" class="zoom" />
+    </div>
+
+    <!-- Frase da foto atual -->
+    <div class="declaration" id="declaration" aria-live="polite" aria-atomic="true"></div>
+
+    <!-- Contadores -->
+    <div class="contadores" aria-label="Contadores de tempo">
+      <div id="contadorBeijo" aria-live="polite"></div>
+      <div id="contadorNamoro" aria-live="polite"></div>
+    </div>
+
+    <!-- Botões especiais -->
+    <div class="controls">
+      <button id="frase-btn" class="btn-control" aria-label="Mostrar frase aleatória">Me sinto assim por você...</button>
+      <button id="night-mode" class="btn-control" aria-label="Ativar modo noite romântica">Modo Noite Romântica</button>
+      <button id="music-toggle" class="btn-control" aria-label="Tocar ou pausar música de fundo">Tocar Música</button>
+    </div>
+
+    <!-- Datas especiais -->
+    <div class="datas-especiais" aria-label="Datas especiais e declarações"></div>
+
+    <!-- Poema com digitação -->
+    <pre id="poema" aria-live="polite" aria-atomic="true"></pre>
+
+    <!-- Música de fundo -->
+    <audio id="musica" src="all_of_me.mp3" loop preload="auto"></audio>
+  </div>
+
+  <script>
+    // Frases para cada foto
+    const frases = [
+      "Cada momento ao seu lado é um presente do universo.",
+      "Seu sorriso ilumina meus dias como o sol.",
+      "Você é minha inspiração diária.",
+      "Nosso amor cresce mais a cada instante.",
+      "Seu abraço é meu lugar favorito.",
+      "Você é o motivo do meu melhor sorriso.",
+      "Com você, tudo faz sentido.",
+      "Você é meu lar, minha paz.",
+      "Nosso amor é eterno em cada batida do meu coração.",
+      "Te amo mais do que palavras podem expressar.",
+      "Meu coração é todo seu.",
+      "Amar você é a melhor parte da minha vida.",
+      "Você é meu sonho realizado.",
+      "Somos perfeitos juntos."
+    ];
+
+    // Carrossel de fotos e frases
+    let index = 0;
+    const imgs = document.querySelectorAll(".carousel img");
+    const declaration = document.getElementById("declaration");
+
+    function trocaImagem() {
+      imgs.forEach(img => img.classList.remove("active"));
+      imgs[index].classList.add("active");
+      declaration.innerText = frases[index];
+      index = (index + 1) % imgs.length;
+    }
+
+    setInterval(trocaImagem, 4000);
+    trocaImagem();
+
+    // Zoom ao clicar na imagem
+    imgs.forEach(img => {
+      img.addEventListener("click", () => {
+        if (img.classList.contains("zoom")) {
+          if (img.style.transform === "scale(1.3)") {
+            img.style.transform = "scale(1)";
+            img.style.zIndex = "auto";
+            img.style.boxShadow = "none";
+            img.style.cursor = "zoom-in";
+          } else {
+            img.style.transform = "scale(1.3)";
+            img.style.zIndex = "10";
+            img.style.boxShadow = "0 0 25px #ff4c7dcc";
+            img.style.cursor = "zoom-out";
+          }
+        }
+      });
+    });
+
+    // Contadores de tempo
+    function atualizaContadores() {
+      const beijo = new Date("2024-08-11T00:00:00");
+      const namoro = new Date("2025-02-01T00:00:00");
+      const agora = new Date();
+
+      function calculaTempo(data) {
+        const diff = agora - data;
+        const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutos = Math.floor((diff / (1000 * 60)) % 60);
+        const segundos = Math.floor((diff / 1000) % 60);
+        return `${dias}d ${horas}h ${minutos}m ${segundos}s`;
+      }
+
+      document.getElementById("contadorBeijo").innerText =
+        `Desde o primeiro beijo: ${calculaTempo(beijo)}`;
+      document.getElementById("contadorNamoro").innerText =
+        `Desde o início do namoro: ${calculaTempo(namoro)}`;
+    }
+    setInterval(atualizaContadores, 1000);
+    atualizaContadores();
+
+    // Botão de frases aleatórias
+    document.getElementById("frase-btn").addEventListener("click", () => {
+      const frase = frases[Math.floor(Math.random() * frases.length)];
+      alert(frase);
+    });
+
+    // Modo noite romântica
+    document.getElementById("night-mode").addEventListener("click", () => {
+      document.body.classList.toggle("modo-noite");
+    });
+
+    // Corações flutuantes
+    function criarCoracao() {
+      const coracao = document.createElement("div");
+      coracao.innerText = "❤️";
+      coracao.classList.add("coracao");
+      coracao.style.left = Math.random() * 100 + "vw";
+      coracao.style.top = "100vh";
+      coracao.style.fontSize = Math.random() * 20 + 10 + "px";
+      coracao.style.animation = "subir 5s linear forwards";
+      document.body.appendChild(coracao);
+      setTimeout(() => coracao.remove(), 5000);
+    }
+    setInterval(criarCoracao, 500);
+
+    // Poema com digitação
+    const poemaTexto = `Você chegou como brisa suave,
+
+Me envolveu com teu calor,
+Fez do meu mundo um jardim,
+Onde só floresce o amor.`;
+    let i = 0;
+    function digitarPoema() {
+      if (i < poemaTexto.length) {
+        document.getElementById("poema").innerText += poemaTexto[i];
+        i++;
+        setTimeout(digitarPoema, 80);
+      }
+    }
+    digitarPoema();
+
+    // Popups das datas especiais
+    const datas = {
+      "11/08/2024": "Primeiro beijo – O início da nossa linda história. 💋",
+      "18/01/2025": "Primeiro date – Meu coração disparou. ❤️",
+      "01/02/2025": "Pedido de namoro – Nosso elo eterno começou. 💍",
+      "02/03/2025": "Primeira viagem juntos – Aventuras ao seu lado. 🏞️",
+      "01/04/2025": "Entrega das alianças – Um compromisso para sempre. 🔗"
+    };
+
+    const datasContainer = document.querySelector(".datas-especiais");
+
+    Object.entries(datas).forEach(([data, mensagem]) => {
+      const btn = document.createElement("button");
+      btn.className = "data-btn";
+      btn.innerText = data;
+      btn.title = mensagem;
+      btn.addEventListener("click", () => {
+        alert(`${data}\n\n${mensagem}`);
+      });
+      datasContainer.appendChild(btn);
+    });
+
+    // Música de fundo - controle play/pause
+    const musica = document.getElementById("musica");
+    const musicToggle = document.getElementById("music-toggle");
+
+    musicToggle.addEventListener("click", () => {
+      if (musica.paused) {
+        musica.play();
+        musicToggle.innerText = "Pausar Música";
+      } else {
+        musica.pause();
+        musicToggle.innerText = "Tocar Música";
+      }
+    });
+
+    // Mensagem final surpresa após 30 segundos
+    setTimeout(() => {
+      alert("Obrigado por compartilhar esse amor incrível comigo! ❤️ Que nossa história continue sempre assim, cheia de carinho e alegria.");
+    }, 30000);
+
+    // Botões surpresa escondidos nas imagens e datas especiais (exemplo simples)
+    imgs.forEach((img, idx) => {
+      img.addEventListener("dblclick", () => {
+        alert(`Surpresa! Você clicou duas vezes na foto ${idx + 1} ❤️`);
+      });
+    });
+    datasContainer.querySelectorAll(".data-btn").forEach((btn, idx) => {
+      btn.addEventListener("dblclick", () => {
+        alert(`Surpresa na data especial: ${btn.innerText}! 🌹`);
+      });
+    });
+  </script>
 </body>
 </html>
